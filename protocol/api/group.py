@@ -10,7 +10,7 @@ def send_message(peer_id: int, message: str):
     })
 
 def send_message_keyboard(peer_id: int, message: str,
-                          keyboard: dict = {'one_time': True, 'buttons': []}):
+                          keyboard: dict = {'one_time': False, 'buttons': []}):
     return group_send_api('messages.send', {
         'peer_id': peer_id,
         'message': message,
@@ -24,6 +24,16 @@ def send_message_carousel(peer_id: int, message: str,
         'peer_id': peer_id,
         'message': message,
         'template': dumps(carousel),
+        'random_id': rand()
+    })
+
+def send_message_multi(peer_id: int, message: str,
+                          carousel: dict = {}, keyboard: dict = {'one_time': True, 'buttons': []}):
+    return group_send_api('messages.send', {
+        'peer_id': peer_id,
+        'message': message,
+        'template': dumps(carousel),
+        'keyboard': dumps(keyboard),
         'random_id': rand()
     })
 

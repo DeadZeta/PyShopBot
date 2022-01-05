@@ -1,7 +1,7 @@
 from protocol.api import base, bot
 import config
 from bot.handler import handle
-import time
+from database.handler import create_tables
 from threading import Thread
 
 longpoll = {
@@ -22,6 +22,8 @@ def init():
     longpoll['key'] = server['response'].get('key')
     longpoll['server'] = server['response'].get('server')
     longpoll['ts'] = int(server['response'].get('ts'))
+
+    create_tables()
 
     listen()
 

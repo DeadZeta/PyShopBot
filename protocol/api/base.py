@@ -10,7 +10,11 @@ def group_send_api(method: str, params: dict):
     params['access_token'] = config.group_token,
     params['v'] = config.version,
 
-    response = requests.post(VK_API_URL + method, data = params, headers=headers)
+    try:
+        response = requests.post(VK_API_URL + method, data = params, headers=headers)
+    except requests.exceptions.ConnectionError:
+        print('Error connection... exit...')
+        exit()
 
     if response.status_code != 200:
         print("Error: status code is not 200")

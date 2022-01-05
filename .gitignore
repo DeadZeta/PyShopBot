@@ -125,6 +125,7 @@ venv.bak/
 
 # Project Vision
 config.py
+bot.db
 
 # mypy
 .mypy_cache/
